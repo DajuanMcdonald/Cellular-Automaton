@@ -15,6 +15,9 @@ Timed steps or 'Evolutions' run cells through rules. For example:
   - A rule tells a cell to turn 'ON' if another condition is 'True'
   
 # The Algorithm
+GameOfLife =  
+  {
+
 - if cell neighbors < 2
   -> turn off
 
@@ -27,6 +30,7 @@ Timed steps or 'Evolutions' run cells through rules. For example:
 - if cell neighbors > 3
   -> turn off
   
+  }
   # Audience
   Philosophers,
   Biologist,
