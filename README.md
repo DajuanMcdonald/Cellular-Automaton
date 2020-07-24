@@ -28,6 +28,6 @@ if cell neighbors == 3
   turn off
   
   # Audience
-  Philosophers
-  Biologist
+  Philosophers,
+  Biologist,
   Students with basic coding background
