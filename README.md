@@ -30,7 +30,7 @@ GameOfLife =
 - if cell neighbors > 3
   -> turn off
   
-  }
+ }
   # Audience
   Philosophers,
   Biologist,
