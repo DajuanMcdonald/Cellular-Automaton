@@ -16,16 +16,16 @@ Timed steps or 'Evolutions' run cells through rules. For example:
   
 # The Algorithm
 - if cell neighbors < 2
-  -- turn off
+  -> turn off
 
 - if cell neighbors == 2 || cell neighbors == 3
-  stay on
+  -> stay on
 
 - if cell neighbors == 3
-  turn on
+  -> turn on
  
 - if cell neighbors > 3
-  turn off
+  -> turn off
   
   # Audience
   Philosophers,
