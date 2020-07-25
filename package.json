@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/DajuanMcdonald/Cellular-Automaton/issues"
   },
-  "homepage": "https://github.com/DajuanMcdonald/Cellular-Automaton#readme"
+  "homepage": "https://github.com/DajuanMcdonald/Cellular-Automaton#readme",
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  }
 }
