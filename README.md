@@ -1,4 +1,4 @@
-# Cellular-Automaton [https://dajuanmcdonald.github.io/Cellular-Automaton/]
+# Cellular-Automaton
 Collection of algorithms on a dimensional grid of specified shape. [initial grid: 2-dimensions]
 
 Sets of rules specifies how cells evolve through timed steps. [initial rules: 4 rules]  [initial time: 1000ms]
@@ -13,6 +13,9 @@ Timed steps or 'Evolutions' run cells through rules. For example:
   - A rule tells a cell to turn 'ON' if a condition is 'True'
   - A rule tells a cell to turn 'OFF' if another condition is 'True'
   - A rule tells a cell to turn 'ON' if another condition is 'True'
+  
+  # Demo
+  [https://dajuanmcdonald.github.io/Cellular-Automaton/]
   
 # The Algorithm
 GameOfLife =  
