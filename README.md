@@ -1,4 +1,4 @@
-# Cellular-Automaton
+# Cellular-Automaton [https://dajuanmcdonald.github.io/Cellular-Automaton/]
 Collection of algorithms on a dimensional grid of specified shape. [initial grid: 2-dimensions]
 
 Sets of rules specifies how cells evolve through timed steps. [initial rules: 4 rules]  [initial time: 1000ms]
