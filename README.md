@@ -15,7 +15,7 @@ Timed steps or 'Evolutions' run cells through rules. For example:
   - A rule tells a cell to turn 'ON' if another condition is 'True'
   
   # Demo
-  [https://dajuanmcdonald.github.io/Cellular-Automaton/]
+  [Live site demo](https://dajuanmcdonald.github.io/Cellular-Automaton/)
   
 # The Algorithm
 GameOfLife =  
