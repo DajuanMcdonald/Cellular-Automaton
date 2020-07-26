@@ -1,3 +1,4 @@
+// import dimensions from './config'
 // //The Rules to Game of Life: simple edition
 // /*
 // Start by populating the 'world' with 'live' cells that we choose. 
@@ -29,8 +30,8 @@
 //  * @createGrid : 
 //  * @updateGrid : 
 //  */
-const rows = 40; // x
-const cols = 40; // y
+const rows = 25; // x
+const cols = 25; // y
 
 let start = false;
 let timer;
@@ -49,7 +50,7 @@ function createGen() {
     }
 }
 
-function initGenArrays() {
+function createArrays() {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             currentGen[i][j] = 0;
@@ -279,5 +280,5 @@ function resetGrid() {
 window.onload=()=>{
     createGrid()
     createGen()
-    initGenArrays()
+    createArrays()
 }

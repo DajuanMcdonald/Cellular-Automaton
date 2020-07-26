@@ -1,22 +1,22 @@
 #world {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 table {
-    background-color: #d8bfd8;
+  background-color: #d8bfd8;
 
 }
 
 td {
-    border: 1px solid #800080;
-    width: 10px;
-    height: 10px;
+  border: 1px solid #800080;
+  width: 10px;
+  height: 10px;
 }
 
 td.alive {
-    background-color: black;
+  background-color: black;
 }
 td.dead {
-    background-color: red;
+  background-color: red;
 
 }
