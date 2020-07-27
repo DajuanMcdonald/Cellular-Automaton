@@ -170,7 +170,7 @@ function countNeighbor(row, col) {
     return count;   
 }
 
-function createNextGen() {
+function createNextGen( row, col ) {
     for (row in currentGen) {
         //loop again for col
         for (col in currentGen[row]) {
@@ -223,7 +223,7 @@ function updateGen(row, col) {
         }
     }
 }
-function updateGrid() {
+function updateGrid( row, col ) {
     let cell = ''
     for (row in currentGen) {
         for (col in currentGen[row]) {
@@ -249,11 +249,27 @@ function iterate() {
     updateGen()
     countNeighbor()
     updateGrid()
-    // checkedCell()
 
     if (start) {
         timer = setTimeout(iterate, iterateSpeed)
     }   
+
+}
+
+function randomConfig(step) {
+    let config = Math.floor((Math.random() * 10) + 1)
+
+    for (step in config) {
+        if (step > 5) {
+            this.setAttribute("class", "dead")
+            currentGen[row][col] = step - 1
+        } else {
+            this.setAttribute("class", "alive")
+            currentGen[row][col] = step + 1
+        }
+
+    }
+
 
 }
 
@@ -268,6 +284,7 @@ function stepWise() {
         timer = setTimeout(iterate, iterateSpeed)
     }
 }
+
 
 function startStop() {
     let startStop = document.querySelector('#btnStartStop')

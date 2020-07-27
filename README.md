@@ -1,7 +1,18 @@
 # Cellular-Automaton
-Collection of algorithms on a dimensional grid of specified shape. [initial grid: 2-dimensions]
+Welcome to John Conway's "Game of Life"! This is a computer science
+classic from 1970, a program that simulates a cellular automaton (plural
+automata). It has connections to different aspects of computer science
+including:
+- Pattern complexity
+- dynamic simulation
+- computational engines
 
-Sets of rules specifies how cells evolve through timed steps. [initial rules: 4 rules]  [initial time: 1000ms]
+
+In this project, use of: Collection of algorithms on a dimensional grid
+of specified shape. [initial grid: 2-dimensions], Sets of rules
+specifies how cells evolve through timed steps. [initial rules: 4 rules]
+[initial time: 1000ms]
+
 
 # How it Works
 Algorithmic simulations, particularly with a cell on a grid (of cells) [initial size: 25 X 25]
@@ -18,8 +29,7 @@ Timed steps or 'Evolutions' run cells through rules. For example:
   [https://dajuanmcdonald.github.io/Cellular-Automaton/]
   
 # The Algorithm
-GameOfLife =  
-  {
+GameOfLife = {
 
 - if cell neighbors < 2
   -> turn off
