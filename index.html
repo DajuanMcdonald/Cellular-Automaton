@@ -6,12 +6,14 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>The Game of Life: Simple Edition</title>
 
-        <!-- CSS only -->
+        <!-- Bootstrap CSS only -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
               crossorigin="anonymous">
+
         <!--Custom Stylesheet-->
         <link rel="stylesheet" href="index.css">
+
         <link rel="icon" href="https://i.pinimg.com/originals/11/7f/51/117f51946efb1484f56a433283549858.png">
     </head>
 
@@ -21,7 +23,9 @@
             <a class="navbar-brand" href="#">Game Of Life</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"/>
+                <span class="navbar-toggler-icon">
+
+                </span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -39,7 +43,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Glider</a>
-                            <a class="dropdown-item" href="#">Occilator</a>
+                            <a class="dropdown-item" href="#">Random</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Rule 9</a>
                         </div>
@@ -47,15 +51,15 @@
 
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+<!--                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="stepWise()">Step</button>
                 </form>
             </div>
         </nav>
     </header>
         <div id='world'>
 
-        <div>
+        <div class="btn-group btn-group-lg" role="group" aria-label="Buttons">
             <input type="button" class="btn btn-success" id="btnStartStop" aria-label="Iterate" value="Iterate"
                    onclick="startStop()">
             <input type="button" class="btn btn-danger" id="btnReset" aria-label="Reset" value="Reset"

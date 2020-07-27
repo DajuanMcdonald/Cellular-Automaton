@@ -120,49 +120,49 @@ function countNeighbor(row, col) {
     let ncol = Number(col)
     
     if (nrow - 1 >= 0) {
-        if (currentGen[nrow - 1][ncol] == 1) {
+        if (currentGen[nrow - 1][ncol] === 1) {
             count = count + 1
         }
     }
     
     if (nrow - 1 >= 0 && ncol - 1 >= 0) {
-        if (currentGen[nrow - 1][ncol - 1] == 1) {
+        if (currentGen[nrow - 1][ncol - 1] === 1) {
             count = count + count
         }
     }
     if (nrow  + 1 < rows && ncol + 1 < cols) {
-        if (currentGen[nrow + 1][ncol  + 1] == 1) {
+        if (currentGen[nrow + 1][ncol  + 1] === 1) {
             count++
         }
     }
 
     //sanity check
     if (ncol - 1 >= 0) {
-        if (currentGen[nrow][ncol - 1] == 1) {
+        if (currentGen[nrow][ncol - 1] === 1) {
             count++
         }
         
     }
     
     if (ncol + 1 < cols) {
-        if (currentGen[nrow][ncol + 1] == 1) {
+        if (currentGen[nrow][ncol + 1] === 1) {
             count++
         }
     }
     
     if (nrow + 1 < rows && ncol - 1 >= 0) {
-        if (currentGen[nrow + 1][ncol - 1] == 1) {
+        if (currentGen[nrow + 1][ncol - 1] === 1) {
             count++
         }
     }
     
     if (nrow + 1 < rows && ncol + 1 < cols) {
-        if (currentGen[nrow + 1][ncol + 1] == 1)
+        if (currentGen[nrow + 1][ncol + 1] === 1)
         count++;
     }
     
     if (nrow + 1 < rows) {
-        if (currentGen[nrow + 1][ncol] == 1) 
+        if (currentGen[nrow + 1][ncol] === 1)
             count++;
         
     }
@@ -177,7 +177,7 @@ function createNextGen() {
             let neighbors = countNeighbor(row, col)
             
             //check if alive/dead and apply rules
-            if (currentGen[row][col] == 1) {
+            if (currentGen[row][col] === 1) {
                 //any 'live' cell with fewer than 2 live neighbors will die the next iteration (outlier)
                 // nextGen[row][col] = 1;
                 
@@ -186,12 +186,12 @@ function createNextGen() {
                     //any 'live' cell with more than 2 but less than 3 neighbors will live on the next iteration (parent)
                 } 
                 
-                if (neighbors == 2 ) {
+                if (neighbors === 2 ) {
                     nextGen[row][col] = 1
                     // any 'live' cell with 4 live neighbors will die the next iteration (wheel)
                 } 
 
-                if (neighbors == 3) {
+                if (neighbors === 3) {
                     nextGen[row][col] = 1
                 }
                 
@@ -202,7 +202,7 @@ function createNextGen() {
                 //any 'dead' 'bottom' cell with exactly 3 live neighbors will be born the next iteration (child)
             }
             
-            if (currentGen[row][col] == 0) {
+            if (currentGen[row][col] === 0) {
                 if (neighbors == 3) {
                     nextGen[row][col] = 1
                     
@@ -215,7 +215,7 @@ function createNextGen() {
 
 
 
-function updateGen() {
+function updateGen(row, col) {
     for (row in currentGen) {
         for (col in currentGen[row]) {
             currentGen[row][col] = nextGen[row][col]
@@ -228,7 +228,7 @@ function updateGrid() {
     for (row in currentGen) {
         for (col in currentGen[row]) {
             cell = document.getElementById(row + "_" + col)
-            if (currentGen[row][col] == 0) {
+            if (currentGen[row][col] === 0) {
                 cell.setAttribute('class', 'dead')
             } else {
                 cell.setAttribute('class', 'alive')
@@ -249,14 +249,28 @@ function iterate() {
     updateGen()
     countNeighbor()
     updateGrid()
+    // checkedCell()
 
     if (start) {
         timer = setTimeout(iterate, iterateSpeed)
     }   
 
 }
+
+function stepWise() {
+    createNextGen()
+    updateGen()
+    countNeighbor()
+    updateGrid()
+    checkedCell()
+
+    if (start) {
+        timer = setTimeout(iterate, iterateSpeed)
+    }
+}
+
 function startStop() {
-    let startstop = document.querySelector('#btnStartStop')
+    let startStop = document.querySelector('#btnStartStop')
     
     if (!start) {
         start = true
