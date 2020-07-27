@@ -1,5 +1,13 @@
 #world {
   padding-bottom: 10px;
+  padding-top: 10px;
+  /*margin: 5%;*/
+  border: 1px solid black;
+  display: flex;
+  /*justify-content: center;*/
+  justify-content: space-evenly;
+  flex-direction: column;
+
 }
 
 table {
@@ -9,8 +17,8 @@ table {
 
 td {
   border: 1px solid #800080;
-  width: 10px;
-  height: 10px;
+  width: 25px;
+  height: 25px;
 }
 
 td.alive {
