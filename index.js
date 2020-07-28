@@ -188,18 +188,19 @@ function createNextGen( row, col ) {
             if (currentGen[row][col] === 1) {
                 //any 'live' cell with fewer than 2 live neighbors will die the next iteration (outlier)
                 // nextGen[row][col] = 1;
+                nextGen[row][col] = 0
                 
-                if (neighbors < 2 ) {
+                if (neighbors && neighbors < 2 ) {
                     nextGen[row][col] = 0
                     //any 'live' cell with more than 2 but less than 3 neighbors will live on the next iteration (parent)
-                } 
+                }
                 
-                if (neighbors === 2 ) {
+                if (neighbors === 2 || neighbors === 3 ) {
                     nextGen[row][col] = 1
                     // any 'live' cell with 4 live neighbors will die the next iteration (wheel)
                 } 
 
-                if (neighbors === 3) {
+                if (neighbors || neighbors === 3) {
                     nextGen[row][col] = 1
                 }
                 
@@ -213,7 +214,7 @@ function createNextGen( row, col ) {
             if (currentGen[row][col] === 0) {
                 if (neighbors === 3) {
                     nextGen[row][col] = 1
-                    
+
                 }
             }
         }
