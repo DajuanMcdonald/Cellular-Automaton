@@ -15,6 +15,11 @@ table {
 
 }
 
+#tablegrid {
+  border: 5px solid black;
+
+}
+
 td {
   border: 1px solid #800080;
   width: 25px;

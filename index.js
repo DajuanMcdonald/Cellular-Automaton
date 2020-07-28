@@ -60,7 +60,7 @@ function createArrays() {
 }
 
 function createGrid() {
-    //referece our div id in html.index
+    //reference our div id in html.index
     let world = document.querySelector('#world')
     
     //create new table element as our grid
@@ -92,6 +92,7 @@ function createGrid() {
 }
 
 
+// subroutine to count neighbor cells except edge TODO: count edges
 function checkedCell() {
     let location = this.id.split("_")
     //this is [i]
@@ -107,6 +108,13 @@ function checkedCell() {
         this.setAttribute("class", "alive")
         currentGen[row][col] = 1
     }
+
+    // attempting to count edges
+    if (this.className==='dead' && row < 0) {
+        this.setAttribute('class', 'alive')
+        currentGen[row][col] = 1
+    }
+
 }
 
 
@@ -203,7 +211,7 @@ function createNextGen( row, col ) {
             }
             
             if (currentGen[row][col] === 0) {
-                if (neighbors == 3) {
+                if (neighbors === 3) {
                     nextGen[row][col] = 1
                     
                 }
@@ -240,6 +248,38 @@ function updateGrid( row, col ) {
 
 
 
+// sample cell configurations users can load
+ // grab specific elements from list of elements
+// if element's class name matches description
+// change the state of that element via class name
+
+//about elements:
+/*
+* - have id and class name
+*
+* '*/
+
+
+// Glider
+let list = ['1_15', '2_16', '3_15', '3_14', '3_13']
+
+function randomConfig() {
+
+    const cells = document.querySelectorAll('td')
+    for (let node of cells){
+        if (list.includes(node.id)) {
+            // node.classList.toggle('alive')
+            node.setAttribute('class', 'alive')
+            currentGen[node] = 1
+            nextGen[node] = 1
+        }
+
+
+        console.log(list.includes(node.id))
+    }
+
+}
+
 
 
 
@@ -256,22 +296,22 @@ function iterate() {
 
 }
 
-function randomConfig(step) {
-    let config = Math.floor((Math.random() * 10) + 1)
-
-    for (step in config) {
-        if (step > 5) {
-            this.setAttribute("class", "dead")
-            currentGen[row][col] = step - 1
-        } else {
-            this.setAttribute("class", "alive")
-            currentGen[row][col] = step + 1
-        }
-
-    }
-
-
-}
+// function randomConfig(step) {
+//     let config = Math.floor((Math.random() * 10) + 1)
+//
+//     for (step in config) {
+//         if (step > 5) {
+//             this.setAttribute("class", "dead")
+//             currentGen[row][col] = step - 1
+//         } else {
+//             this.setAttribute("class", "alive")
+//             currentGen[row][col] = step + 1
+//         }
+//
+//     }
+//
+//
+// }
 
 function stepWise() {
     createNextGen()
