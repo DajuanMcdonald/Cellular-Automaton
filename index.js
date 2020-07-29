@@ -30,8 +30,8 @@
 //  * @createGrid : 
 //  * @updateGrid : 
 //  */
-const rows = 25; // x
-const cols = 25; // y
+const rows = 5; // x
+const cols = 5; // y
 
 let start = false;
 let timer;
@@ -110,10 +110,10 @@ function checkedCell() {
     }
 
     // attempting to count edges
-    if (this.className==='dead' && row < 0) {
-        this.setAttribute('class', 'alive')
-        currentGen[row][col] = 1
-    }
+    // if (this.className==='dead' && row < 0) {
+    //     this.setAttribute('class', 'alive')
+    //     currentGen[row][col] = 1
+    // }
 
 }
 
@@ -129,18 +129,22 @@ function countNeighbor(row, col) {
     
     if (nrow - 1 >= 0) {
         if (currentGen[nrow - 1][ncol] === 1) {
-            count = count + 1
+            count++
+            console.log(132, `${count}`)
         }
     }
     
     if (nrow - 1 >= 0 && ncol - 1 >= 0) {
         if (currentGen[nrow - 1][ncol - 1] === 1) {
-            count = count + count
+            count++
+            console.log(139, `${count}`)
         }
     }
+
     if (nrow  + 1 < rows && ncol + 1 < cols) {
         if (currentGen[nrow + 1][ncol  + 1] === 1) {
-            count++
+            count++;
+            console.log(144, `${count}`)
         }
     }
 
@@ -148,6 +152,7 @@ function countNeighbor(row, col) {
     if (ncol - 1 >= 0) {
         if (currentGen[nrow][ncol - 1] === 1) {
             count++
+            console.log(151, `${count}`)
         }
         
     }
@@ -155,27 +160,40 @@ function countNeighbor(row, col) {
     if (ncol + 1 < cols) {
         if (currentGen[nrow][ncol + 1] === 1) {
             count++
+            console.log(158, `${count}`)
         }
     }
     
     if (nrow + 1 < rows && ncol - 1 >= 0) {
         if (currentGen[nrow + 1][ncol - 1] === 1) {
             count++
+            console.log(164, `${count}`)
         }
     }
     
+    
     if (nrow + 1 < rows && ncol + 1 < cols) {
-        if (currentGen[nrow + 1][ncol + 1] === 1)
-        count++;
+        if (currentGen[nrow + 1][ncol - 1] === 1) {
+
+            count++;
+            console.log(171, `${count}`)
+
+        }
+           
     }
     
     if (nrow + 1 < rows) {
-        if (currentGen[nrow + 1][ncol] === 1)
+        if (currentGen[nrow + 1][ncol] === 1) {
+
             count++;
+            console.log(176, `${count}`)
+
+        }
         
     }
     
-    return count;   
+    console.log(`${count}`)
+    return count;
 }
 
 function createNextGen( row, col ) {
@@ -183,14 +201,16 @@ function createNextGen( row, col ) {
         //loop again for col
         for (col in currentGen[row]) {
             let neighbors = countNeighbor(row, col)
-            
+
+            console.log({neighbors}, {row}, {col})
+
             //check if alive/dead and apply rules
             if (currentGen[row][col] === 1) {
                 //any 'live' cell with fewer than 2 live neighbors will die the next iteration (outlier)
                 // nextGen[row][col] = 1;
                 nextGen[row][col] = 0
                 
-                if (neighbors && neighbors < 2 ) {
+                if (neighbors < 2 ) {
                     nextGen[row][col] = 0
                     //any 'live' cell with more than 2 but less than 3 neighbors will live on the next iteration (parent)
                 }
@@ -210,9 +230,9 @@ function createNextGen( row, col ) {
                 }
                 //any 'dead' 'bottom' cell with exactly 3 live neighbors will be born the next iteration (child)
             }
-            
+
             if (currentGen[row][col] === 0) {
-                if (neighbors === 3) {
+                if (neighbors && neighbors === 3) {
                     nextGen[row][col] = 1
 
                 }
@@ -293,7 +313,8 @@ function iterate() {
 
     if (start) {
         timer = setTimeout(iterate, iterateSpeed)
-    }   
+    }
+    console.log(timer)
 
 }
 
@@ -319,13 +340,17 @@ function stepWise() {
     updateGen()
     countNeighbor()
     updateGrid()
-    checkedCell()
 
     if (start) {
         timer = setTimeout(iterate, iterateSpeed)
     }
 }
 
+function generation() {
+    if (start) {
+        timer = setTimeout(iterate, iterateSpeed)
+    }
+}
 
 function startStop() {
     let startStop = document.querySelector('#btnStartStop')
