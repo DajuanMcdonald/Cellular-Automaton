@@ -33,8 +33,10 @@
 //  * @createGrid : 
 //  * @updateGrid : 
  */
-const rows = 15; // x
-const cols = 15; // y
+
+
+const rows = 5; // x
+const cols = 5; // y
 
 let start = false;
 let timer;
@@ -99,7 +101,7 @@ function renderCanvas() {
     let ctx = canvas.getContext('2d')
     let cells = new Path2D();
     
-
+    
     for (let i = 0; i < rows; i++) {
         
         for (let j = 0; j < cols; j++) {
@@ -107,19 +109,19 @@ function renderCanvas() {
             ctx.strokeRect(j * 50, i * 50, 50, 50)
             
             cell = 'y' +i + '_' + 'x' +j;
-
+            
         }
-
+        
     
         canvas.addEventListener('click', () => {
-          
+            
             console.log('clicked here');
             console.log();
         })
     }
 
     // ctx.addEventListener('click', () => {
-    //     console.log(i)
+        //     console.log(i)
     // })
 }
 
@@ -128,23 +130,23 @@ function renderCanvas() {
 function checkedCell(id) {
     let location = this.id.split("_")
     //this is [i]
-    const row = Number(location[0]) 
+    let row = Number(location[0]) 
     //this is [j]
-    const col = Number(location[1])
+    let col = Number(location[1])
     
     // toggle 
     // this.className === 'alive' ? this.setAttribute('class', 'dead') : this.setAttribute('class', 'alive')
     // this.className === 'alive' ? currentGen[row][col] = 1 : currentGen[row][col] = 0
-    this.className==='alive' ? currentGen[row][col] = 0 : currentGen[row][col] = 1
-
+    // this.className==='alive' ? currentGen[row][col] = 0 : currentGen[row][col] = 1
+    
     if (this.className==='alive') {
         this.setAttribute("class", "dead")
-    //     currentGen[row][col] = 0
+        currentGen[row][col] = 0
     } else {
         this.setAttribute("class", "alive")
-    //     currentGen[row][col] = 1
+        currentGen[row][col] = 1
     }
-
+    
 }
 
 
@@ -154,8 +156,8 @@ function checkedCell(id) {
 // cells clicked will be toggled
 function countNeighbor(row, col) {
     let count = 0
-    const nrow = Number(row)
-    const ncol = Number(col)
+    let nrow = Number(row)
+    let ncol = Number(col)
     
     if (nrow - 1 > 0) {
         if (currentGen[nrow - 1][ncol] === 1) {
@@ -170,14 +172,14 @@ function countNeighbor(row, col) {
             console.log(139, `${count}`)
         }
     }
-
+    
     if (nrow  + 1 < rows && ncol + 1 < cols) {
         if (currentGen[nrow + 1][ncol  + 1] === 1) {
             count++;
             console.log(144, `${count}`)
         }
     }
-
+    
     //sanity check
     if (ncol - 1 > 0) {
         if (currentGen[nrow][ncol - 1] === 1) {
@@ -204,10 +206,10 @@ function countNeighbor(row, col) {
     
     if (nrow + 1 < rows && ncol + 1 < cols) {
         if (currentGen[nrow + 1][ncol - 1] === 1) {
-
+            
             count++;
             console.log(171, `${count}`)
-
+            
         }
            
     }
@@ -230,9 +232,9 @@ function createNextGen( row, col ) {
         //loop again for col
         for (col in currentGen[row]) {
             let neighbors = countNeighbor(row, col)
-
+            
             console.log({neighbors}, {row}, {col})
-
+            
             //check if alive/dead and apply rules
             if (currentGen[row][col] === 1) {
                 //any 'live' cell with fewer than 2 live neighbors will die the next iteration (outlier)
@@ -248,7 +250,7 @@ function createNextGen( row, col ) {
                     nextGen[row][col] = 1
                     // any 'live' cell with 4 live neighbors will die the next iteration (wheel)
                 } 
-
+                
                 if (neighbors === 3) {
                     nextGen[row][col] = 1
                 }
@@ -286,23 +288,21 @@ function updateGrid( row, col ) {
     for (row in currentGen) {
         for (col in currentGen[row]) {
             cell = document.getElementById(row + "_" + col)
-
-            currentGen[row][col] === 0 ? cell.setAttribute('class', 'dead') : cell.setAttribute('class', 'alive')
-
-            // if (currentGen[row][col] === 0) {
-            //     cell.setAttribute('class', 'dead')
-            // } else {
-            //     cell.setAttribute('class', 'alive')
-            // }
+            
+            if (currentGen[row][col] === 0) {
+                cell.setAttribute('class', 'dead')
+            } else {
+                cell.setAttribute('class', 'alive')
+            }
         }
     }
-
+    
 }
 
 
 
 // sample cell configurations users can load
- // grab specific elements from list of elements
+// grab specific elements from list of elements
 // if element's class name matches description
 // change the state of that element via class name
 
@@ -317,7 +317,7 @@ function updateGrid( row, col ) {
 let list = []
 
 function randomConfig() {
-
+    
     const cells = document.querySelectorAll('td')
     for (let node of cells) {
         if (list.push(node.id)) {
@@ -325,7 +325,7 @@ function randomConfig() {
         }
         
         console.log(`${currentGen[node]}`)
-
+        
         console.log(list.includes(node.id))
         console.log(node.id)
     }
@@ -347,18 +347,18 @@ function iterate() {
         timer = setTimeout(iterate, stepSpeed)
     }
     console.log(`${timer}`)
-
+    
 }
 
 // function randomConfig(step) {
-//     let config = Math.floor((Math.random() * 10) + 1)
-//
-//     for (step in config) {
-//         if (step > 5) {
+    //     let config = Math.floor((Math.random() * 10) + 1)
+    //
+    //     for (step in config) {
+        //         if (step > 5) {
 //             this.setAttribute("class", "dead")
 //             currentGen[row][col] = step - 1
 //         } else {
-//             this.setAttribute("class", "alive")
+    //             this.setAttribute("class", "alive")
 //             currentGen[row][col] = step + 1
 //         }
 //
@@ -372,7 +372,7 @@ function stepWise() {
     updateGen()
     countNeighbor()
     updateGrid()
-
+    
     if (start) {
         timer = setTimeout(iterate, stepSpeed)
     }
@@ -391,12 +391,12 @@ function startStop() {
         start = true
         startStop.value = 'Stop'
         iterate()
-        } else {
+    } else {
             start = false
             startStop.value='Start'
             clearTimeout(timer)
         }
-
+        
     }
 /**
  * @createNextGen 
@@ -410,5 +410,23 @@ window.onload=()=>{
     createGrid()
     createGen()
     createArrays()
-    renderCanvas()
+    // renderCanvas()
 }
+
+ module.exports = {
+     createArrays,
+     createGrid,
+     countNeighbor,
+     checkedCell,
+     renderCanvas,
+     iterate,
+     createNextGen,
+     createGen,
+     resetGrid,
+     startStop,
+     stepWise,
+     updateGrid,
+     updateGen,
+
+
+ }
