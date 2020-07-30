@@ -1,4 +1,5 @@
-// import dimensions from './config'
+// const dimensions = require('./config')
+
 // //The Rules to Game of Life: simple edition
 // /*
 // Start by populating the 'world' with 'live' cells that we choose. 
@@ -24,20 +25,22 @@
 
 
 // //Execute a working solution:
-// /**
+/**
+ * @currentGen : 
+ * @nextGen :
 //  * @createGen : 
 //  * @initGenArray :
 //  * @createGrid : 
 //  * @updateGrid : 
-//  */
-const rows = 5; // x
-const cols = 5; // y
+ */
+const rows = 15; // x
+const cols = 15; // y
 
 let start = false;
 let timer;
-let iterateSpeed = 1000;
+let stepSpeed = 1000;
 
-
+// there's always more rows than columns
 let currentGen = [rows];
 let nextGen = [rows];
 
@@ -90,30 +93,57 @@ function createGrid() {
     world.appendChild(grid)
     
 }
+// CANVAS
+function renderCanvas() {
+    let canvas = document.getElementById('tutorial')
+    let ctx = canvas.getContext('2d')
+    let cells = new Path2D();
+    
+
+    for (let i = 0; i < rows; i++) {
+        
+        for (let j = 0; j < cols; j++) {
+            ctx.fillStyle = 'rgb(0, 0, 200, 0.5)'
+            ctx.strokeRect(j * 50, i * 50, 50, 50)
+            
+            cell = 'y' +i + '_' + 'x' +j;
+
+        }
+
+    
+        canvas.addEventListener('click', () => {
+          
+            console.log('clicked here');
+            console.log();
+        })
+    }
+
+    // ctx.addEventListener('click', () => {
+    //     console.log(i)
+    // })
+}
 
 
 // subroutine to count neighbor cells except edge TODO: count edges
-function checkedCell() {
+function checkedCell(id) {
     let location = this.id.split("_")
     //this is [i]
-    let row = Number(location[0]) 
+    const row = Number(location[0]) 
     //this is [j]
-    let col = Number(location[1])
+    const col = Number(location[1])
     
     // toggle 
+    // this.className === 'alive' ? this.setAttribute('class', 'dead') : this.setAttribute('class', 'alive')
+    // this.className === 'alive' ? currentGen[row][col] = 1 : currentGen[row][col] = 0
+    this.className==='alive' ? currentGen[row][col] = 0 : currentGen[row][col] = 1
+
     if (this.className==='alive') {
         this.setAttribute("class", "dead")
-        currentGen[row][col] = 0
+    //     currentGen[row][col] = 0
     } else {
         this.setAttribute("class", "alive")
-        currentGen[row][col] = 1
-    }
-
-    // attempting to count edges
-    // if (this.className==='dead' && row < 0) {
-    //     this.setAttribute('class', 'alive')
     //     currentGen[row][col] = 1
-    // }
+    }
 
 }
 
@@ -124,17 +154,17 @@ function checkedCell() {
 // cells clicked will be toggled
 function countNeighbor(row, col) {
     let count = 0
-    let nrow = Number(row)
-    let ncol = Number(col)
+    const nrow = Number(row)
+    const ncol = Number(col)
     
-    if (nrow - 1 >= 0) {
+    if (nrow - 1 > 0) {
         if (currentGen[nrow - 1][ncol] === 1) {
             count++
             console.log(132, `${count}`)
         }
     }
     
-    if (nrow - 1 >= 0 && ncol - 1 >= 0) {
+    if (nrow - 1 >= 0 && ncol - 1 > 0) {
         if (currentGen[nrow - 1][ncol - 1] === 1) {
             count++
             console.log(139, `${count}`)
@@ -149,7 +179,7 @@ function countNeighbor(row, col) {
     }
 
     //sanity check
-    if (ncol - 1 >= 0) {
+    if (ncol - 1 > 0) {
         if (currentGen[nrow][ncol - 1] === 1) {
             count++
             console.log(151, `${count}`)
@@ -164,7 +194,7 @@ function countNeighbor(row, col) {
         }
     }
     
-    if (nrow + 1 < rows && ncol - 1 >= 0) {
+    if (nrow + 1 < rows && ncol - 1 > 0) {
         if (currentGen[nrow + 1][ncol - 1] === 1) {
             count++
             console.log(164, `${count}`)
@@ -184,7 +214,6 @@ function countNeighbor(row, col) {
     
     if (nrow + 1 < rows) {
         if (currentGen[nrow + 1][ncol] === 1) {
-
             count++;
             console.log(176, `${count}`)
 
@@ -215,12 +244,12 @@ function createNextGen( row, col ) {
                     //any 'live' cell with more than 2 but less than 3 neighbors will live on the next iteration (parent)
                 }
                 
-                if (neighbors === 2 || neighbors === 3 ) {
+                if (neighbors === 2  || neighbors === 3 ) {
                     nextGen[row][col] = 1
                     // any 'live' cell with 4 live neighbors will die the next iteration (wheel)
                 } 
 
-                if (neighbors || neighbors === 3) {
+                if (neighbors === 3) {
                     nextGen[row][col] = 1
                 }
                 
@@ -253,15 +282,18 @@ function updateGen(row, col) {
     }
 }
 function updateGrid( row, col ) {
-    let cell = ''
+    // let cell = ''
     for (row in currentGen) {
         for (col in currentGen[row]) {
             cell = document.getElementById(row + "_" + col)
-            if (currentGen[row][col] === 0) {
-                cell.setAttribute('class', 'dead')
-            } else {
-                cell.setAttribute('class', 'alive')
-            }
+
+            currentGen[row][col] === 0 ? cell.setAttribute('class', 'dead') : cell.setAttribute('class', 'alive')
+
+            // if (currentGen[row][col] === 0) {
+            //     cell.setAttribute('class', 'dead')
+            // } else {
+            //     cell.setAttribute('class', 'alive')
+            // }
         }
     }
 
@@ -282,23 +314,23 @@ function updateGrid( row, col ) {
 
 
 // Glider
-let list = ['1_15', '2_16', '3_15', '3_14', '3_13']
+let list = []
 
 function randomConfig() {
 
     const cells = document.querySelectorAll('td')
-    for (let node of cells){
-        if (list.includes(node.id)) {
-            // node.classList.toggle('alive')
-            node.setAttribute('class', 'alive')
+    for (let node of cells) {
+        if (list.push(node.id)) {
             currentGen[node] = 1
-            nextGen[node] = 1
         }
-
+        
+        console.log(`${currentGen[node]}`)
 
         console.log(list.includes(node.id))
+        console.log(node.id)
     }
 
+    console.log(`${currentGen}`)
 }
 
 
@@ -312,9 +344,9 @@ function iterate() {
     updateGrid()
 
     if (start) {
-        timer = setTimeout(iterate, iterateSpeed)
+        timer = setTimeout(iterate, stepSpeed)
     }
-    console.log(timer)
+    console.log(`${timer}`)
 
 }
 
@@ -342,13 +374,13 @@ function stepWise() {
     updateGrid()
 
     if (start) {
-        timer = setTimeout(iterate, iterateSpeed)
+        timer = setTimeout(iterate, stepSpeed)
     }
 }
 
 function generation() {
     if (start) {
-        timer = setTimeout(iterate, iterateSpeed)
+        timer = setTimeout(iterate, stepSpeed)
     }
 }
 
@@ -361,7 +393,7 @@ function startStop() {
         iterate()
         } else {
             start = false
-            startStop.value='Iterate'
+            startStop.value='Start'
             clearTimeout(timer)
         }
 
@@ -378,4 +410,5 @@ window.onload=()=>{
     createGrid()
     createGen()
     createArrays()
+    renderCanvas()
 }

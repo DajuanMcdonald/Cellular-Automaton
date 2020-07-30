@@ -1,6 +1,6 @@
 const dimesions = {
-    rows: 25,
-    cols: 25
+    rows: 5,
+    cols: 5
 }
 
 export default dimesions;

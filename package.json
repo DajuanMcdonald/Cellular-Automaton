@@ -1,5 +1,5 @@
 {
-  "name": "Cellular-Automaton",
+  "name": "cellular-automaton",
   "version": "1.0.0",
   "description": "Collection of algorithms on a dimensional grid of specified shape. [initial grid: 2-dimensions]",
   "main": "index.js",
@@ -13,11 +13,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": { 
+  "bugs": {
     "url": "https://github.com/DajuanMcdonald/Cellular-Automaton/issues"
   },
   "homepage": "https://github.com/DajuanMcdonald/Cellular-Automaton#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "node-sass": "^4.14.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.2",
+    "jest": "^26.1.0"
   }
 }
