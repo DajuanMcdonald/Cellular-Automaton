@@ -35,8 +35,8 @@
  */
 
 
-const rows = 5; // x
-const cols = 5; // y
+const rows = 25; // x
+const cols = 25; // y
 
 let start = false;
 let timer;
