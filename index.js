@@ -1,4 +1,5 @@
-// import dimensions from './config'
+// const dimensions = require('./config')
+
 // //The Rules to Game of Life: simple edition
 // /*
 // Start by populating the 'world' with 'live' cells that we choose. 
@@ -24,20 +25,24 @@
 
 
 // //Execute a working solution:
-// /**
+/**
+ * @currentGen : 
+ * @nextGen :
 //  * @createGen : 
 //  * @initGenArray :
 //  * @createGrid : 
 //  * @updateGrid : 
-//  */
+ */
+
+
 const rows = 5; // x
 const cols = 5; // y
 
 let start = false;
 let timer;
-let iterateSpeed = 1000;
+let stepSpeed = 1000;
 
-
+// there's always more rows than columns
 let currentGen = [rows];
 let nextGen = [rows];
 
@@ -90,10 +95,39 @@ function createGrid() {
     world.appendChild(grid)
     
 }
+// CANVAS
+function renderCanvas() {
+    let canvas = document.getElementById('tutorial')
+    let ctx = canvas.getContext('2d')
+    let cells = new Path2D();
+    
+    
+    for (let i = 0; i < rows; i++) {
+        
+        for (let j = 0; j < cols; j++) {
+            ctx.fillStyle = 'rgb(0, 0, 200, 0.5)'
+            ctx.strokeRect(j * 50, i * 50, 50, 50)
+            
+            cell = 'y' +i + '_' + 'x' +j;
+            
+        }
+        
+    
+        canvas.addEventListener('click', () => {
+            
+            console.log('clicked here');
+            console.log();
+        })
+    }
+
+    // ctx.addEventListener('click', () => {
+        //     console.log(i)
+    // })
+}
 
 
 // subroutine to count neighbor cells except edge TODO: count edges
-function checkedCell() {
+function checkedCell(id) {
     let location = this.id.split("_")
     //this is [i]
     let row = Number(location[0]) 
@@ -101,6 +135,10 @@ function checkedCell() {
     let col = Number(location[1])
     
     // toggle 
+    // this.className === 'alive' ? this.setAttribute('class', 'dead') : this.setAttribute('class', 'alive')
+    // this.className === 'alive' ? currentGen[row][col] = 1 : currentGen[row][col] = 0
+    // this.className==='alive' ? currentGen[row][col] = 0 : currentGen[row][col] = 1
+    
     if (this.className==='alive') {
         this.setAttribute("class", "dead")
         currentGen[row][col] = 0
@@ -108,13 +146,7 @@ function checkedCell() {
         this.setAttribute("class", "alive")
         currentGen[row][col] = 1
     }
-
-    // attempting to count edges
-    // if (this.className==='dead' && row < 0) {
-    //     this.setAttribute('class', 'alive')
-    //     currentGen[row][col] = 1
-    // }
-
+    
 }
 
 
@@ -127,29 +159,29 @@ function countNeighbor(row, col) {
     let nrow = Number(row)
     let ncol = Number(col)
     
-    if (nrow - 1 >= 0) {
+    if (nrow - 1 > 0) {
         if (currentGen[nrow - 1][ncol] === 1) {
             count++
             console.log(132, `${count}`)
         }
     }
     
-    if (nrow - 1 >= 0 && ncol - 1 >= 0) {
+    if (nrow - 1 >= 0 && ncol - 1 > 0) {
         if (currentGen[nrow - 1][ncol - 1] === 1) {
             count++
             console.log(139, `${count}`)
         }
     }
-
+    
     if (nrow  + 1 < rows && ncol + 1 < cols) {
         if (currentGen[nrow + 1][ncol  + 1] === 1) {
             count++;
             console.log(144, `${count}`)
         }
     }
-
+    
     //sanity check
-    if (ncol - 1 >= 0) {
+    if (ncol - 1 > 0) {
         if (currentGen[nrow][ncol - 1] === 1) {
             count++
             console.log(151, `${count}`)
@@ -164,7 +196,7 @@ function countNeighbor(row, col) {
         }
     }
     
-    if (nrow + 1 < rows && ncol - 1 >= 0) {
+    if (nrow + 1 < rows && ncol - 1 > 0) {
         if (currentGen[nrow + 1][ncol - 1] === 1) {
             count++
             console.log(164, `${count}`)
@@ -174,17 +206,16 @@ function countNeighbor(row, col) {
     
     if (nrow + 1 < rows && ncol + 1 < cols) {
         if (currentGen[nrow + 1][ncol - 1] === 1) {
-
+            
             count++;
             console.log(171, `${count}`)
-
+            
         }
            
     }
     
     if (nrow + 1 < rows) {
         if (currentGen[nrow + 1][ncol] === 1) {
-
             count++;
             console.log(176, `${count}`)
 
@@ -201,9 +232,9 @@ function createNextGen( row, col ) {
         //loop again for col
         for (col in currentGen[row]) {
             let neighbors = countNeighbor(row, col)
-
+            
             console.log({neighbors}, {row}, {col})
-
+            
             //check if alive/dead and apply rules
             if (currentGen[row][col] === 1) {
                 //any 'live' cell with fewer than 2 live neighbors will die the next iteration (outlier)
@@ -215,12 +246,12 @@ function createNextGen( row, col ) {
                     //any 'live' cell with more than 2 but less than 3 neighbors will live on the next iteration (parent)
                 }
                 
-                if (neighbors === 2 || neighbors === 3 ) {
+                if (neighbors === 2  || neighbors === 3 ) {
                     nextGen[row][col] = 1
                     // any 'live' cell with 4 live neighbors will die the next iteration (wheel)
                 } 
-
-                if (neighbors || neighbors === 3) {
+                
+                if (neighbors === 3) {
                     nextGen[row][col] = 1
                 }
                 
@@ -253,10 +284,11 @@ function updateGen(row, col) {
     }
 }
 function updateGrid( row, col ) {
-    let cell = ''
+    // let cell = ''
     for (row in currentGen) {
         for (col in currentGen[row]) {
             cell = document.getElementById(row + "_" + col)
+            
             if (currentGen[row][col] === 0) {
                 cell.setAttribute('class', 'dead')
             } else {
@@ -264,13 +296,13 @@ function updateGrid( row, col ) {
             }
         }
     }
-
+    
 }
 
 
 
 // sample cell configurations users can load
- // grab specific elements from list of elements
+// grab specific elements from list of elements
 // if element's class name matches description
 // change the state of that element via class name
 
@@ -282,23 +314,23 @@ function updateGrid( row, col ) {
 
 
 // Glider
-let list = ['1_15', '2_16', '3_15', '3_14', '3_13']
+let list = []
 
 function randomConfig() {
-
+    
     const cells = document.querySelectorAll('td')
-    for (let node of cells){
-        if (list.includes(node.id)) {
-            // node.classList.toggle('alive')
-            node.setAttribute('class', 'alive')
+    for (let node of cells) {
+        if (list.push(node.id)) {
             currentGen[node] = 1
-            nextGen[node] = 1
         }
-
-
+        
+        console.log(`${currentGen[node]}`)
+        
         console.log(list.includes(node.id))
+        console.log(node.id)
     }
 
+    console.log(`${currentGen}`)
 }
 
 
@@ -312,21 +344,21 @@ function iterate() {
     updateGrid()
 
     if (start) {
-        timer = setTimeout(iterate, iterateSpeed)
+        timer = setTimeout(iterate, stepSpeed)
     }
-    console.log(timer)
-
+    console.log(`${timer}`)
+    
 }
 
 // function randomConfig(step) {
-//     let config = Math.floor((Math.random() * 10) + 1)
-//
-//     for (step in config) {
-//         if (step > 5) {
+    //     let config = Math.floor((Math.random() * 10) + 1)
+    //
+    //     for (step in config) {
+        //         if (step > 5) {
 //             this.setAttribute("class", "dead")
 //             currentGen[row][col] = step - 1
 //         } else {
-//             this.setAttribute("class", "alive")
+    //             this.setAttribute("class", "alive")
 //             currentGen[row][col] = step + 1
 //         }
 //
@@ -340,15 +372,15 @@ function stepWise() {
     updateGen()
     countNeighbor()
     updateGrid()
-
+    
     if (start) {
-        timer = setTimeout(iterate, iterateSpeed)
+        timer = setTimeout(iterate, stepSpeed)
     }
 }
 
 function generation() {
     if (start) {
-        timer = setTimeout(iterate, iterateSpeed)
+        timer = setTimeout(iterate, stepSpeed)
     }
 }
 
@@ -359,12 +391,12 @@ function startStop() {
         start = true
         startStop.value = 'Stop'
         iterate()
-        } else {
+    } else {
             start = false
-            startStop.value='Iterate'
+            startStop.value='Start'
             clearTimeout(timer)
         }
-
+        
     }
 /**
  * @createNextGen 
@@ -378,4 +410,23 @@ window.onload=()=>{
     createGrid()
     createGen()
     createArrays()
+    // renderCanvas()
 }
+
+ module.exports = {
+     createArrays,
+     createGrid,
+     countNeighbor,
+     checkedCell,
+     renderCanvas,
+     iterate,
+     createNextGen,
+     createGen,
+     resetGrid,
+     startStop,
+     stepWise,
+     updateGrid,
+     updateGen,
+
+
+ }
