@@ -1,6 +1,6 @@
 #world {
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 1px;
+  padding-top: 1px;
   /*margin: 5%;*/
   border: 1px solid black;
   display: flex;
@@ -12,6 +12,11 @@
 
 table {
   background-color: #d8bfd8;
+
+}
+
+#tablegrid {
+  border: 5px solid black;
 
 }
 
@@ -27,4 +32,8 @@ td.alive {
 td.dead {
   background-color: red;
 
+}
+
+#tutorial {
+  border: 1px solid black;
 }

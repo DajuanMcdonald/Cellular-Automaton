@@ -57,20 +57,29 @@
             </div>
         </nav>
     </header>
-        <div id='world'>
-
-        <div class="btn-group btn-group-lg" role="group" aria-label="Buttons">
-            <input type="button" class="btn btn-success" id="btnStartStop" aria-label="Iterate" value="Iterate"
-                   onclick="startStop()">
-            <input type="button" class="btn btn-danger" id="btnReset" aria-label="Reset" value="Reset"
-                   onclick="resetGrid()">
+    <div id='world'>
+        <div >
+            <!-- <div class="modal-dialog" role="dialog">
+                
+                <h5 class="modal-title">Generations:</h5>
+                
+                <canvas id="tutorial" width="150" height="150"></canvas>
+            </div> -->
         </div>
-
+        
+            <div class="btn-group btn-group-lg" role="group" aria-label="Buttons">
+                <input type="button" class="btn btn-success" id="btnStartStop" aria-label="Start" value="Start"
+                onclick="startStop()">
+                <input type="button" class="btn btn-danger" id="btnReset" aria-label="Reset" value="Reset"
+                onclick="resetGrid()">
+                <input type="button" class="btn btn-info" aria-label="Randomize" value="Random" onclick="randomConfig()">
+            </div>
+            
+            
         </div>
-
-
+        
         <!--Custom Javascript-->
         <script src="index.js"></script>
     </body>
-
+    
 </html>
