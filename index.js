@@ -127,17 +127,13 @@ function renderCanvas() {
 
 
 // subroutine to count neighbor cells except edge TODO: count edges
-function checkedCell(id) {
-    let location = this.id.split("_")
+function checkedCell() {
+    let location = this.id.split('_')
     //this is [i]
     let row = Number(location[0]) 
     //this is [j]
     let col = Number(location[1])
-    
     // toggle 
-    // this.className === 'alive' ? this.setAttribute('class', 'dead') : this.setAttribute('class', 'alive')
-    // this.className === 'alive' ? currentGen[row][col] = 1 : currentGen[row][col] = 0
-    // this.className==='alive' ? currentGen[row][col] = 0 : currentGen[row][col] = 1
     
     if (this.className==='alive') {
         this.setAttribute("class", "dead")
@@ -223,7 +219,7 @@ function countNeighbor(row, col) {
         
     }
     
-    console.log(`${count}`)
+    // console.log(`${count}`)
     return count;
 }
 
@@ -260,14 +256,17 @@ function createNextGen( row, col ) {
                     
                 }
                 //any 'dead' 'bottom' cell with exactly 3 live neighbors will be born the next iteration (child)
-            }
+            } else {
 
-            if (currentGen[row][col] === 0) {
-                if (neighbors && neighbors === 3) {
-                    nextGen[row][col] = 1
-
+                if (currentGen[row][col] === 0) {
+                    if (neighbors === 3) {
+                        nextGen[row][col] = 1
+    
+                    }
                 }
+
             }
+
         }
     }
 }
@@ -382,6 +381,7 @@ function generation() {
     if (start) {
         timer = setTimeout(iterate, stepSpeed)
     }
+   
 }
 
 function startStop() {
@@ -407,9 +407,10 @@ function resetGrid() {
 }
 
 window.onload=()=>{
-    createGrid()
-    createGen()
-    createArrays()
+    createGrid(),
+    createGen(),
+    createArrays(),
+    generation()
     // renderCanvas()
 }
 
@@ -427,6 +428,5 @@ window.onload=()=>{
      stepWise,
      updateGrid,
      updateGen,
-
 
  }
