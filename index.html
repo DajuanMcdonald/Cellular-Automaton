@@ -18,45 +18,49 @@
     </head>
 
     <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Game Of Life</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">
+        <section>
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">Game Of Life</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+        
+                        </span>
+                    </button>
+        
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="https://github.com/DajuanMcdonald/Cellular-Automaton"> About <span class="sr-only">(current)</span></a>
+                            </li>
+        <!--                    <li class="nav-item">-->
+        <!--                        <a class="nav-link" href="#">Link</a>-->
+        <!--                    </li>-->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Configs
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Glider</a>
+                                    <a class="dropdown-item" href="#">Random</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Rule 9</a>
+                                </div>
+                            </li>
+        
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+        <!--                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="stepWise()">Step</button>
+                        </form>
+                    </div>
+                </nav>
+            </header>
 
-                </span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="https://github.com/DajuanMcdonald/Cellular-Automaton"> About <span class="sr-only">(current)</span></a>
-                    </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#">Link</a>-->
-<!--                    </li>-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Configs
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Glider</a>
-                            <a class="dropdown-item" href="#">Random</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Rule 9</a>
-                        </div>
-                    </li>
-
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-<!--                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="stepWise()">Step</button>
-                </form>
-            </div>
-        </nav>
-    </header>
+        </section>
     <div id='world'>
         <div >
             <!-- <div class="modal-dialog" role="dialog">
@@ -64,15 +68,15 @@
                 
                 <canvas id="tutorial" width="150" height="150"></canvas>
             </div> -->
-            <h5 class="modal-title">Generations:</h5>
+            <h5 class="modal-title">Generations: </h5>
         </div>
         
             <div class="btn-group btn-group-lg" role="group" aria-label="Buttons">
-                <input type="button" class="btn btn-success" id="btnStartStop" aria-label="Start" value="Start"
+                <input type="button" class="btn btn-light" id="btnStartStop" aria-label="Start" value="Start"
                 onclick="startStop()">
-                <input type="button" class="btn btn-danger" id="btnReset" aria-label="Reset" value="Reset"
+                <input type="button" class="btn btn-secondary" id="btnReset" aria-label="Reset" value="Reset"
                 onclick="resetGrid()">
-                <input type="button" class="btn btn-info" aria-label="Randomize" value="Random" onclick="randomConfig()">
+                <input type="button" class="btn btn-dark" aria-label="Random" value="Random" onclick="randomConfig()">
             </div>
             
             

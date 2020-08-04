@@ -345,7 +345,9 @@ function iterate() {
     if (start) {
         timer = setTimeout(iterate, stepSpeed)
     }
-    console.log(`${timer}`)
+    target_1 = document.querySelector('modal-title')
+    target_1.setAttribute('value', `${timer}`)
+    // console.log(`${timer}`)
     
 }
 
@@ -380,6 +382,8 @@ function stepWise() {
 function generation() {
     if (start) {
         timer = setTimeout(iterate, stepSpeed)
+        target = document.querySelector('modal-title')
+        target.setAttribute('value', timer)
     }
    
 }
@@ -401,6 +405,8 @@ function startStop() {
 /**
  * @createNextGen 
  */
+
+
 
 function resetGrid() {
     location.reload()
