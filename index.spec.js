@@ -5,7 +5,7 @@ const example = (a, b) => {
     return a + b;
 } 
 
-describe('file: index.js', () => {
+describe('file: Basics of index.js', () => {
 
     test('test: 2 + 2  = toBe 4', () => {
         expect(example(2, 2)).toBe(4);
@@ -32,4 +32,18 @@ describe('file: index.js', () => {
         expect(checkUpdateGrid).toBeDefined()
     })
 
+    test('test: updateGen function is exist', () => {
+        const checkUpdateGen = jest.spyOn(grid, 'updateGen')
+        expect(checkUpdateGen).toBeDefined()
+    })
+
+})
+
+describe('file: Functionality of index.js', () => {
+    test('test: expect element to have class:alive', () => {
+        const checkCell = grid.checkedCell
+        expect(checkCell('0_0').toReturnWith('dead'))
+        // expect(checkCell).toHaveAttribute('class', 'alive')
+
+    })
 })
